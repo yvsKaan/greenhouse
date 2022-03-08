@@ -33,7 +33,6 @@ export default function HomeScreen() {
           <GreenhouseList key={greenhouse.id} Info={greenhouse} />
         ))}
       </View>
-      
     </View>
   )
 }

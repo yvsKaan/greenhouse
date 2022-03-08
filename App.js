@@ -1,18 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 
 export default function App() {
   return (
-    <HomeScreen />
+    <SafeAreaView>
+      <HomeScreen />
+    </SafeAreaView>
+    
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
