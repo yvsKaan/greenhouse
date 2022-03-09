@@ -1,9 +1,13 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 
 export default function GreenhouseList(props) {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container}
+    onPress={() => navigation.navigate('Detail') }
+    >
       <View style={{height: 150, marginBottom: 50}}>
         <Text style={styles.name}>{props.Info.name}</Text>
         <Image 
@@ -38,7 +42,7 @@ const styles = StyleSheet.create({
     container: {
         width: '90%',
         height: 300,
-        backgroundColor: '#f3f3f3',
+        backgroundColor: '#f1f1f1',
         padding: 20,
         marginLeft: 10,
         marginBottom: 20,
@@ -49,7 +53,6 @@ const styles = StyleSheet.create({
       width: '100%',
       height: '100%',
       zIndex: 1,
-      elevation: 1,
     },
     name: {
         color: "white",
