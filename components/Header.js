@@ -1,30 +1,44 @@
 import React from 'react'
 
-import { View, Text, StyleSheet} from 'react-native'
+import { View, Text, Image, TouchableWithoutFeedback, StyleSheet } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
 export default function Header({isHome, title}) {
+  const navigation = useNavigation();
   return (
     <View style={styles.header}>
-      {isHome ? 
+      {isHome ? <Text></Text> : <TouchableWithoutFeedback onPress={()=> navigation.goBack()}>
+        <Image style={styles.goBack}
+        source= {require('../assets/icons/icon-go-back.png')}
+        />
+      </TouchableWithoutFeedback>
+      }
       <Text style={styles.title}>{title}</Text> 
-      : <Text>Not Home</Text>}
     </View>
   )
 }
 
 const styles = StyleSheet.create({
     header: {
+      flexDirection: 'row',
+      paddingTop: 25,
       height: 100,
       backgroundColor: '#25C050',
       borderBottomLeftRadius: 30,
       borderBottomRightRadius: 30,
-      justifyContent: "center",
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     title: {
         color: "white",
         fontSize: 24,
         textAlign: "center",
         textTransform: "uppercase",
+    },
+    goBack: {
+      position: 'absolute',
+      left: 10,
+      top: '50%',
     },
 });
   

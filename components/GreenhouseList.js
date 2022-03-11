@@ -5,8 +5,11 @@ import { useNavigation } from '@react-navigation/native';
 export default function GreenhouseList(props) {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.container}
-    onPress={() => navigation.navigate('Detail') }
+    <TouchableOpacity 
+    onPress={() => navigation.navigate('Detail',{
+      detail: props.Info,
+    })}
+    style={styles.container}
     >
       <View style={{height: 150, marginBottom: 50}}>
         <Text style={styles.name}>{props.Info.name}</Text>
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     container: {
         width: '90%',
         height: 300,
-        backgroundColor: '#f1f1f1',
+        backgroundColor: '#eaeaea',
         padding: 20,
         marginLeft: 10,
         marginBottom: 20,
