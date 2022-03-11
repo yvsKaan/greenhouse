@@ -6,6 +6,7 @@ import "react-native-gesture-handler";
 
 import HomeScreen from './screens/HomeScreen';
 import Detail from './screens/Detail';
+import Setting from './screens/Setting';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,13 @@ export default function App() {
         <Stack.Screen 
             name="Detail" 
             component={Detail} 
+            options={{
+              headerShown: false,
+            }}
+        />
+        <Stack.Screen 
+            name="Setting" 
+            component={Setting} 
             options={{
               headerShown: false,
             }}

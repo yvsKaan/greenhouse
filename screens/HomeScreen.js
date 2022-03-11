@@ -28,7 +28,7 @@ export default function HomeScreen() {
   return (
     <View>
       <Header isHome={true} title="Greenhouse"/>
-      <View style={styles.content}>
+      <View>
         <Text style={styles.title}>Greenhouses: </Text>
         {greenhouses.map((greenhouse)=>(
           <GreenhouseList key={greenhouse.id} Info={greenhouse} />
@@ -39,14 +39,10 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  content: {
-    width: '100%',
-    marginTop: 50,
-    marginLeft: 10,
-  },
   title: {
     fontSize: 20,
     color: "#25C050",
-    marginBottom: 20,
+    marginLeft: '5%',
+    marginBottom: '5%',
   }
 });

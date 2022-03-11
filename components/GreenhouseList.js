@@ -2,16 +2,16 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 
+import ListOption from './ListOption';
+
 export default function GreenhouseList(props) {
   const navigation = useNavigation();
   return (
     <TouchableOpacity 
     onPress={() => navigation.navigate('Detail',{
       detail: props.Info,
-    })}
-    style={styles.container}
-    >
-      <View style={{height: 150, marginBottom: 50}}>
+    })} style={styles.container} >
+      <View style={styles.imageContainer}>
         <Text style={styles.name}>{props.Info.name}</Text>
         <Image 
         style={styles.image}
@@ -21,21 +21,11 @@ export default function GreenhouseList(props) {
       </View>
       
       <View style={styles.detail}>
-        <View>
-          <Text>{props.Info.tempeture}</Text>
-        </View>
-        <View>
-          <Text>{props.Info.humidity}</Text>
-        </View>
-        <View>
-          <Text>{props.Info.water}</Text>
-        </View>
-        <View>
-          <Text>{props.Info.light ? "On" : "Off"}</Text>
-        </View>
-        <View>
-          <Text>{props.Info.fan ? "On" : "Off"}</Text>
-        </View>
+        <ListOption title="Tempeture" value={props.Info.tempeture} />
+        <ListOption title="Humidity" value={props.Info.humidity} />
+        <ListOption title="Water" value={props.Info.water} />
+        <ListOption title="Ligth" value={props.Info.light  ? "On" : "Off"} />
+        <ListOption title="Fan" value={props.Info.fan ? "On" : "Off"} />
       </View>
     </TouchableOpacity>
   )
@@ -46,10 +36,17 @@ const styles = StyleSheet.create({
         width: '90%',
         height: 300,
         backgroundColor: '#eaeaea',
-        padding: 20,
-        marginLeft: 10,
+        marginLeft: 'auto',
+        marginRight: 'auto',
         marginBottom: 20,
         borderRadius: 20,
+    },
+    imageContainer: {
+      height: 150,
+      marginTop: 10,
+      marginBottom: '5%',
+      paddingLeft: '10%',
+      alignItems: 'center',
     },
     image: {
       position: 'absolute',
@@ -58,17 +55,20 @@ const styles = StyleSheet.create({
       zIndex: 1,
     },
     name: {
+        position: 'absolute',
+        left: '10%',
+        top: '5%',
         color: "white",
         backgroundColor: '#25C050',
         width: '40%',
-        padding: 5,
+        padding: 3,
         textAlign: 'center',
-        margin: 10,
         borderRadius: 20,
         zIndex: 100,
         elevation: 100,
     },
     detail: {
+        width: '100%',
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
