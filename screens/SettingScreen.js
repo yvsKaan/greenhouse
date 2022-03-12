@@ -4,7 +4,7 @@ import { View, Text } from 'react-native'
 
 import Header from '../components/Header';
 
-export default function Setting({ route }) {
+export default function SettingScreen({ route }) {
   const { settingDetail } = route.params;
   return (
     <View>

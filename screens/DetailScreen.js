@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import Header from '../components/Header';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Detail({ route }) {
+export default function DetailScreen({ route }) {
   const navigation = useNavigation();
   const { detail } = route.params;
   return (
