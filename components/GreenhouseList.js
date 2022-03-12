@@ -8,7 +8,7 @@ export default function GreenhouseList(props) {
   const navigation = useNavigation();
   return (
     <TouchableOpacity 
-    onPress={() => navigation.navigate('Detail',{
+    onPress={() => navigation.navigate('Detail', {
       detail: props.Info,
     })} style={styles.container} >
       <View style={styles.imageContainer}>
