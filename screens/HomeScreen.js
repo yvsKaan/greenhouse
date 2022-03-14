@@ -9,7 +9,7 @@ export default function HomeScreen() {
     {
       id: 1,
       name: "Greenhouse 1",
-      tempeture: '24',
+      tempeture: '24 C',
       humidity: '60%',
       water: '60%',
       light: true,
@@ -18,7 +18,7 @@ export default function HomeScreen() {
     {
       id: 2,
       name: "Greenhouse 2",
-      tempeture: '18',
+      tempeture: '18 C',
       humidity: '80%',
       water: '60%',
       light: false,

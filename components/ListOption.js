@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet } from 'react-native'
 
 
-export default function ListOption({title, value}) {
+export default function ListOption({icon, value}) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      <Image style={styles.icon} source={icon} />
       <Text style={styles.value}>{value}</Text>
     </View>
   )
@@ -19,11 +19,10 @@ const styles = StyleSheet.create({
         margin: 5,
         alignItems: 'center',
     },
-    title: {
-        fontSize: 11,
-        fontWeight: 'bold',
+    icon: {
+      margin: 10
     },
     value: {
-        fontSize: 14,
+        fontSize: 16,
     }
 })

@@ -2,6 +2,12 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 
+import Tempeture from '../assets/icons/icon-temperatures.png';
+import Humidity from '../assets/icons/icon-humidity.png';
+import Water from '../assets/icons/icon-water.png';
+import Light from '../assets/icons/icon-light.png';
+import Fan from '../assets/icons/icon-fan.png';
+
 import ListOption from './ListOption';
 
 export default function GreenhouseList(props) {
@@ -21,11 +27,11 @@ export default function GreenhouseList(props) {
       </View>
       
       <View style={styles.detail}>
-        <ListOption title="Tempeture" value={props.Info.tempeture} />
-        <ListOption title="Humidity" value={props.Info.humidity} />
-        <ListOption title="Water" value={props.Info.water} />
-        <ListOption title="Ligth" value={props.Info.light  ? "On" : "Off"} />
-        <ListOption title="Fan" value={props.Info.fan ? "On" : "Off"} />
+        <ListOption icon={Tempeture} value={props.Info.tempeture} />
+        <ListOption icon={Humidity} value={props.Info.humidity} />
+        <ListOption icon={Water} value={props.Info.water} />
+        <ListOption icon={Light} value={props.Info.light  ? "On" : "Off"} />
+        <ListOption icon={Fan} value={props.Info.fan ? "On" : "Off"} />
       </View>
     </TouchableOpacity>
   )
@@ -71,6 +77,6 @@ const styles = StyleSheet.create({
         width: '100%',
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
     }
 });

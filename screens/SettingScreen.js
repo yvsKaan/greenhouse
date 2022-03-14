@@ -8,7 +8,8 @@ export default function SettingScreen({ route }) {
   const { settingDetail } = route.params;
   return (
     <View>
-        <Header isHome= {false} title={settingDetail.name} />
+      {/* form with details */}
+      <Header isHome= {false} title={settingDetail.name} />
       <Text>Setting</Text>
     </View>
   )
