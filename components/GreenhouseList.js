@@ -46,6 +46,14 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
         marginBottom: 20,
         borderRadius: 20,
+        shadowColor: "#000",
+        shadowOffset:{
+        width: 0,
+        height: 5,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 6,
+        elevation: 10,
     },
     imageContainer: {
       height: 150,

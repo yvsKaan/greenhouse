@@ -8,8 +8,8 @@ export default function DetailBox({icon, title, value}) {
     <View style={styles.detailContainer}>
       {/* Tempeture, humidity more detail and touchable */}
       <Text style={styles.title}>{title}</Text>
-      {icon ? <Image source={icon} /> : <Text/>}
-      <Text>{value}</Text>
+      <Image source={icon} />
+      <Text>{typeof value === 'boolean' ? value ? "On" : "Off" : value}</Text>
     </View>
   )
 }
@@ -20,9 +20,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#eaeaea',
     marginTop: 10,
     marginRight: '16%',
-    padding: 20,
+    padding: 25,
     alignItems: 'center',
     borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset:{
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 6,
+    elevation: 10,
   },
   title: {
     fontSize: 16,

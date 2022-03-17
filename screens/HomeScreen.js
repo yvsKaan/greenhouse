@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { View, Text, StyleSheet } from 'react-native'
+import { SafeAreaView, View, Text, StyleSheet } from 'react-native'
 import Header from '../components/Header';
 import GreenhouseList from '../components/GreenhouseList';
 
@@ -26,7 +26,7 @@ export default function HomeScreen() {
     }
   ]
   return (
-    <View>
+    <SafeAreaView>
       <Header isHome={true} title="Greenhouse"/>
       <View>
         <Text style={styles.title}>Greenhouses: </Text>
@@ -34,7 +34,7 @@ export default function HomeScreen() {
           <GreenhouseList key={greenhouse.id} Info={greenhouse} />
         ))}
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 
