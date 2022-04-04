@@ -2,12 +2,6 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 
-import Tempeture from '../assets/icons/icon-temperatures.png';
-import Humidity from '../assets/icons/icon-humidity.png';
-import Water from '../assets/icons/icon-water.png';
-import Light from '../assets/icons/icon-light.png';
-import Fan from '../assets/icons/icon-fan.png';
-
 import ListOption from './ListOption';
 
 export default function GreenhouseList(props) {
@@ -27,11 +21,11 @@ export default function GreenhouseList(props) {
       </View>
       
       <View style={styles.detail}>
-        <ListOption icon={Tempeture} value={props.Info.tempeture} />
-        <ListOption icon={Humidity} value={props.Info.humidity} />
-        <ListOption icon={Water} value={props.Info.water} />
-        <ListOption icon={Light} value={props.Info.light  ? "On" : "Off"} />
-        <ListOption icon={Fan} value={props.Info.fan ? "On" : "Off"} />
+        <ListOption icon='temperature-high' icontype="font-awesome-5" value={props.Info.tempeture} />
+        <ListOption icon='water-percent' icontype="material-community" value={props.Info.humidity} />
+        <ListOption icon='water-outline' icontype="material-community" value={props.Info.water} />
+        <ListOption icon='lightbulb-outline' icontype="material" value={props.Info.light  ? "On" : "Off"} />
+        <ListOption icon='fan' icontype="font-awesome-5" value={props.Info.fan ? "On" : "Off"} />
       </View>
     </TouchableOpacity>
   )

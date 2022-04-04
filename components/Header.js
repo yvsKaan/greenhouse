@@ -2,14 +2,14 @@ import React from 'react'
 
 import { View, Text, Image, TouchableWithoutFeedback, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
+import {Icon} from 'react-native-elements';
 
 export default function Header({isHome, title}) {
   const navigation = useNavigation();
   return (
     <View style={styles.header}>
       {isHome ? <Text></Text> : <TouchableWithoutFeedback onPress={()=> navigation.goBack()}>
-        <Image style={styles.goBack}
-        source= {require('../assets/icons/icon-go-back.png')}
+        <Icon containerStyle={styles.goBack} name='arrow-back' type='ionicon' size={42} color='#fff'
         />
       </TouchableWithoutFeedback>
       }
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     },
     goBack: {
       position: 'absolute',
-      left: 10,
+      left: 20,
       top: '50%',
     },
 });
