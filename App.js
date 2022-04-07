@@ -7,13 +7,21 @@ import "react-native-gesture-handler";
 import HomeScreen from './screens/HomeScreen';
 import DetailScreen from './screens/DetailScreen';
 import SettingScreen from './screens/SettingScreen';
+import LoginScreen from './screens/LoginScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen 
+            name="Login" 
+            component={LoginScreen} 
+            options={{
+              headerShown: false,
+            }}
+        />
         <Stack.Screen 
             name="Home" 
             component={HomeScreen} 

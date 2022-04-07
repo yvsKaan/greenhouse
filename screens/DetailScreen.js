@@ -5,10 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import Header from '../components/Header';
 import DetailBox from '../components/DetailBox';
 
-import Water from '../assets/icons/icon-water.png';
-import Light from '../assets/icons/icon-light.png';
-import Fan from '../assets/icons/icon-fan.png';
-
 export default function DetailScreen({ route }) {
   const navigation = useNavigation();
   const { detail } = route.params;
