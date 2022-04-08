@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react'
 
-import { KeyboardAvoidingView, View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { KeyboardAvoidingView, View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native'
 import {auth} from '../firebase-config/firebase'
 
 export default function LoginScreen() {
@@ -37,6 +37,10 @@ export default function LoginScreen() {
     }
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
+            <Image 
+            source={require('../assets/logo.png')}
+            style={styles.logo} />
+
             <View style={styles.inputContainer}>
                 <TextInput style={styles.input}
                 placeholder='Email' 
@@ -73,9 +77,15 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#25C050',
+        paddingTop: 30,
+    },
+    logo: {
+        width: '70%',
+        height: 400,
+        marginLeft: '15%',
     },
     inputContainer: {
-        flex: 1, 
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -96,6 +106,7 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#25C050',
         padding: 10,
+        borderRadius: 5,
         borderColor: 'white',
         borderWidth: 1,
     },
@@ -110,6 +121,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 10,
         marginTop: 10,
+        borderRadius: 5,
         borderColor: '#25C050',
         borderWidth: 1,
     },
