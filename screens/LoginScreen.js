@@ -1,10 +1,40 @@
-import React, { useState } from 'react'
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react'
 
 import { KeyboardAvoidingView, View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import {auth} from '../firebase-config/firebase'
 
 export default function LoginScreen() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const navigation = useNavigation()
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user =>{
+            if (user) {
+                navigation.replace("Home")
+            }
+        })
+        return unsubscribe
+    },[])
+    const hangleSingUp = () =>{
+        auth
+            .createUserWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log('Sing Up in with: ', user.email);
+            })
+            .catch(error => alert.message(error.message))
+    }
+    const hangleLogin = () =>{
+        auth
+            .signInWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log('Logged in with: ', user.email);
+            })
+            .catch(error => alert.message(error.message))
+    }
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
             <View style={styles.inputContainer}>
@@ -21,10 +51,16 @@ export default function LoginScreen() {
                 />
                 
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.loginBtn} activeOpacity={0.6}>
+                    <TouchableOpacity 
+                    style={styles.loginBtn} 
+                    activeOpacity={0.6}
+                    onPress={hangleLogin}>
                         <Text style={styles.loginText}>LOGIN</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.registerBtn} activeOpacity={0.6}>
+                    <TouchableOpacity 
+                    style={styles.registerBtn} 
+                    activeOpacity={0.6}
+                    onPress={hangleSingUp}>
                         <Text style={styles.registerText}>REGISTER</Text>
                     </TouchableOpacity>
                 </View>

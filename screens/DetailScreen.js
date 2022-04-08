@@ -28,9 +28,9 @@ export default function DetailScreen({ route }) {
         <DetailBox title="Humidity" value={detail.humidity}/>
         {/* water, fan, light */}
         <View style={styles.detailBox}>
-          <DetailBox icon={Water} title="Water" value={detail.water}/>
-          <DetailBox icon={Light} title="Light" value={detail.light}/>
-          <DetailBox icon={Fan} title="Fan" value={detail.fan}/>
+          <DetailBox title="Water" value={detail.water}/>
+          <DetailBox title="Light" value={detail.light}/>
+          <DetailBox title="Fan" value={detail.fan}/>
         </View>
       </View>
 
