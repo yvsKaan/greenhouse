@@ -36,9 +36,7 @@ export default function DetailScreen({ route }) {
 
         {/* Setting button */}
       <TouchableOpacity style={styles.settingBtn}
-      onPress={()=> navigation.navigate('Setting', {
-        settingDetail: detail, 
-      })}>
+      onPress={()=> navigation.navigate('Setting')}>
         <Text style={{color:'white', fontSize: 18, fontWeight: '300'}}>Setting</Text>
       </TouchableOpacity>
     </View>

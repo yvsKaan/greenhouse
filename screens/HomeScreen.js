@@ -1,10 +1,11 @@
-import React from 'react'
-
+import React, {useState, useEffect} from 'react'
+import {db} from '../firebase-config/firebase'
 import { SafeAreaView, View, Text, StyleSheet } from 'react-native'
 import Header from '../components/Header';
 import GreenhouseList from '../components/GreenhouseList';
 
 export default function HomeScreen() {
+  const [data, setData] = useState([]);
   const greenhouses = [
     {
       id: 1,
@@ -25,6 +26,16 @@ export default function HomeScreen() {
       fan: false
     }
   ]
+  useEffect(()=>{
+    const fetchPost = async () => {
+      db.ref("/Ayarlar").once('value', snapshot => {
+        const veri = snapshot.val();
+        setData(veri);
+      })
+     }
+     fetchPost();
+  }, [])
+
   return (
     <SafeAreaView>
       <Header isHome={true} title="Greenhouse"/>
@@ -34,6 +45,7 @@ export default function HomeScreen() {
           <GreenhouseList key={greenhouse.id} Info={greenhouse} />
         ))}
       </View>
+      <Text>{data.maxSicaklik}</Text>
     </SafeAreaView>
   )
 }
