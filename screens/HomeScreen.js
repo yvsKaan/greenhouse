@@ -45,7 +45,6 @@ export default function HomeScreen() {
           <GreenhouseList key={greenhouse.id} Info={greenhouse} />
         ))}
       </View>
-      <Text>{data.maxSicaklik}</Text>
     </SafeAreaView>
   )
 }
