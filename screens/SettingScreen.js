@@ -39,26 +39,33 @@ export default function SettingScreen() {
           setModalVisible(!modalVisible);
         }}
       >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-          <Text>{modalSetting === "maxSicaklik" ? data.maxSicaklik : 0}</Text>
-          <Slider
-            value={modalSetting === "maxSicaklik" ? data.maxSicaklik : modalSetting === "minSicaklik" ? data.minSicaklik : 0}
-            onValueChange={value => handleInputChange(modalSetting, value)}
-            step={1}
-            maximumValue={50}
-            minimumValue={0}
-          />
-            <TouchableOpacity
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Confirm</Text>
-            </TouchableOpacity>
+        <View style={styles.modalView}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.sliderText}>
+              {
+                modalSetting === "maxSicaklik" ? data.maxSicaklik : 
+                modalSetting === "minSicaklik" ? data.minSicaklik : 0
+              }
+            </Text>
+            <Slider
+              value={
+                modalSetting === "maxSicaklik" ? data.maxSicaklik : 
+                modalSetting === "minSicaklik" ? data.minSicaklik : 0
+              }
+              onValueChange={value => handleInputChange(modalSetting, value)}
+              step={1}
+              maximumValue={50}
+              minimumValue={0}
+            />
+              <TouchableOpacity
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>Confirm</Text>
+              </TouchableOpacity>
           </View>
         </View>
       </Modal>
-
 
       <ListItem.Accordion
         content={
@@ -88,17 +95,42 @@ export default function SettingScreen() {
           <ListItem.Chevron />
         </ListItem>
       </ListItem.Accordion>
-
-
-      
-      <View style={styles.settingBlock}>
-       <Text>{data.maxSicaklik} + {data.minSicaklik}</Text>
-      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  modalView: {
+    width: '90%', 
+    height: '100%',
+    marginLeft: '5%',
+    justifyContent: 'center',
+  },
+  modalContainer: {
+    width: '100%',
+    height: 300,
+    padding: 20,
+    backgroundColor: '#eaeaea',
+    borderRadius: 20,
+    justifyContent: 'center',
+  },
+  sliderText: {
+    textAlign: 'center',
+    fontSize: 24,
+    margin: 20,
+  },
+  buttonClose: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  textStyle: {
+    paddingHorizontal: 50,
+    paddingVertical: 10,
+    borderRadius: 5,
+    backgroundColor: '#25C050',
+    color: '#fff',
+  },
   settingBlock: {
     flexDirection: 'column',
     width: '100%',
