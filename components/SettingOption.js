@@ -21,19 +21,31 @@ export default function SettingOption() {
     const handleSettingChange = (modalSettingName, modalVisibleSetting) => {
         setModalVisible(modalVisibleSetting);
         setModalSetting(modalSettingName);
-        setCurrentSetting(data[modalSettingName]);
+        setCurrentSetting(data[modalSettingName] || 0);
 
         if(modalSettingName === "maxTempeture"){
           setMaxSliderValue(60);
-          setMinSliderValue(data.minTempeture + 1);
+          setMinSliderValue(data.minTempeture + 1 || 0);
         }else if(modalSettingName === "minTempeture"){
-          setMaxSliderValue(data.maxTempeture - 1 );
+          setMaxSliderValue(data.maxTempeture - 1 || 60);
           setMinSliderValue(0);
         }else if(modalSettingName === "maxHumidity"){
           setMaxSliderValue(100);
-          setMinSliderValue(data.minHumidity + 1);
+          setMinSliderValue(data.minHumidity + 1 || 0);
         }else if(modalSettingName === "minHumidity"){
-          setMaxSliderValue(data.maxHumidity - 1 );
+          setMaxSliderValue(data.maxHumidity - 1 || 100);
+          setMinSliderValue(0);
+        }else if(modalSettingName === "maxMoisture"){
+          setMaxSliderValue(100);
+          setMinSliderValue(data.minMoisture + 1 || 0);
+        }else if(modalSettingName === "minMoisture"){
+          setMaxSliderValue(data.maxMoisture - 1 || 100);
+          setMinSliderValue(0);
+        }else if(modalSettingName === "minWaterLevel"){
+          setMaxSliderValue(100);
+          setMinSliderValue(0);
+        }else if(modalSettingName === "waterInternal"){
+          setMaxSliderValue(24);
           setMinSliderValue(0);
         }
     }
@@ -57,6 +69,13 @@ export default function SettingOption() {
           <View style={styles.modalContainer}>
             <Text style={styles.sliderText}>
               {currentSetting}
+              <Text style={styles.sliderText}>
+              {
+                modalSetting === "maxTempeture" ? "C" :
+                modalSetting === "minTempeture" ? "C" :  
+                modalSetting === "waterInternal" ? " Clock" : "%"
+              }
+            </Text>
             </Text>
             <Slider
               value={data[modalSetting]}
@@ -93,6 +112,41 @@ export default function SettingOption() {
         <ListItem.Content>
           <ListItem.Title>Maximum Humidity</ListItem.Title>
           <ListItem.Subtitle>{data.maxHumidity}</ListItem.Subtitle>
+        </ListItem.Content>
+        <ListItem.Chevron />
+      </ListItem>
+      <ListItem onPress={() => handleSettingChange("minHumidity", !modalVisible)} bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title>Minimum Humidity</ListItem.Title>
+          <ListItem.Subtitle>{data.minHumidity}</ListItem.Subtitle>
+        </ListItem.Content>
+        <ListItem.Chevron />
+      </ListItem>
+      <ListItem onPress={() => handleSettingChange("maxMoisture", !modalVisible)} bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title>Maximum Moisture</ListItem.Title>
+          <ListItem.Subtitle>{data.maxMoisture || 0}</ListItem.Subtitle>
+        </ListItem.Content>
+        <ListItem.Chevron />
+      </ListItem>
+      <ListItem onPress={() => handleSettingChange("minMoisture", !modalVisible)} bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title>Minimum Moisture</ListItem.Title>
+          <ListItem.Subtitle>{data.minMoisture || 0}</ListItem.Subtitle>
+        </ListItem.Content>
+        <ListItem.Chevron />
+      </ListItem>
+      <ListItem onPress={() => handleSettingChange("minWaterLevel", !modalVisible)} bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title>Minimum Water Level</ListItem.Title>
+          <ListItem.Subtitle>{data.minWaterLevel || 0}</ListItem.Subtitle>
+        </ListItem.Content>
+        <ListItem.Chevron />
+      </ListItem>
+      <ListItem onPress={() => handleSettingChange("waterInternal", !modalVisible)} bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title>Daily Watering Interval</ListItem.Title>
+          <ListItem.Subtitle>{data.waterInternal || 0}</ListItem.Subtitle>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
