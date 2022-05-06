@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { View, Text, TextInput, TouchableOpacity, Modal, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, Modal, StyleSheet } from 'react-native'
 import {db} from '../firebase-config/firebase'
 import {Icon, ListItem, Slider} from 'react-native-elements';
 
@@ -55,7 +55,7 @@ export default function SettingOption() {
         setCurrentSetting(value);
     }
   return (
-    <View>
+    <ScrollView horizontal="true">
       <Modal
         animationType="slide"
         transparent={true}
@@ -85,7 +85,7 @@ export default function SettingOption() {
               minimumValue={minSliderValue}
             />
               <TouchableOpacity
-                style={[styles.button, styles.buttonClose]}
+                style={styles.buttonClose}
                 onPress={() => setModalVisible(!modalVisible)}
               >
                 <Text style={styles.textStyle}>Confirm</Text>
@@ -93,64 +93,128 @@ export default function SettingOption() {
           </View>
         </View>
       </Modal>
-
+      
       <ListItem onPress={() => handleSettingChange("maxTempeture", !modalVisible)} bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>Maximum Tempeture</ListItem.Title>
-          <ListItem.Subtitle>{data.maxTempeture}</ListItem.Subtitle>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="temperature-high" color="red" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>Minimum Tempeture</Text>     
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              {data.maxTempeture}
+            </Text>
+          </View>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
+
       <ListItem onPress={() => handleSettingChange("minTempeture", !modalVisible)} bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>Minimum Tempeture</ListItem.Title>
-          <ListItem.Subtitle>{data.minTempeture}</ListItem.Subtitle>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="temperature-low" color="blue" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>Minimum Tempeture</Text>           
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              {data.minTempeture}
+            </Text>
+          </View>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
+
       <ListItem onPress={() => handleSettingChange("maxHumidity", !modalVisible)} bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>Maximum Humidity</ListItem.Title>
-          <ListItem.Subtitle>{data.maxHumidity}</ListItem.Subtitle>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>Maximum Humidity</Text>     
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              {data.maxHumidity}
+            </Text>
+          </View>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
+
       <ListItem onPress={() => handleSettingChange("minHumidity", !modalVisible)} bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>Minimum Humidity</ListItem.Title>
-          <ListItem.Subtitle>{data.minHumidity}</ListItem.Subtitle>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>Minimum Humidity</Text>     
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              {data.minHumidity}
+            </Text>
+          </View>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
+
       <ListItem onPress={() => handleSettingChange("maxMoisture", !modalVisible)} bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>Maximum Moisture</ListItem.Title>
-          <ListItem.Subtitle>{data.maxMoisture || 0}</ListItem.Subtitle>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>Maximum Moisture</Text>     
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              {data.maxMoisture || 0}
+            </Text>
+          </View>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
+
       <ListItem onPress={() => handleSettingChange("minMoisture", !modalVisible)} bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>Minimum Moisture</ListItem.Title>
-          <ListItem.Subtitle>{data.minMoisture || 0}</ListItem.Subtitle>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>Minimum Moisture</Text>     
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              {data.minMoisture || 0}
+            </Text>
+          </View>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
+
       <ListItem onPress={() => handleSettingChange("minWaterLevel", !modalVisible)} bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>Minimum Water Level</ListItem.Title>
-          <ListItem.Subtitle>{data.minWaterLevel || 0}</ListItem.Subtitle>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>Minimum Water Level</Text>     
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              {data.minWaterLevel || 0}
+            </Text>
+          </View>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
+
       <ListItem onPress={() => handleSettingChange("waterInternal", !modalVisible)} bottomDivider>
-        <ListItem.Content>
-          <ListItem.Title>Daily Watering Interval</ListItem.Title>
-          <ListItem.Subtitle>{data.waterInternal || 0}</ListItem.Subtitle>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>Daily Watering Interval</Text>     
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              {data.waterInternal || 0}
+            </Text>
+          </View>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
-    </View>
+      
+    </ScrollView>
   )
 }
 
@@ -212,5 +276,9 @@ const styles = StyleSheet.create({
     },
     settingInfoTitle: {
       fontSize: 16,
-    }
+    },
+    listItemContent: {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'},
+    listItem: {flexDirection: 'row', alignItems: 'center'},
+    listItemText: {marginLeft: 10 ,fontSize: 17},
+    listItemSubtitle: {fontSize: 16}
 });
