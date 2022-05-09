@@ -52,7 +52,11 @@ export default function SettingOption() {
 
     const handleInputChange = (inputName, value) => {
         db.ref('/Ayarlar/' + inputName).set(value);
-        setCurrentSetting(value);
+        if(typeof value === "boolean" && currentSetting === value){
+          setCurrentSetting(!value);
+        }else{
+          setCurrentSetting(value);
+        }
     }
   return (
     <ScrollView horizontal="true">
@@ -224,7 +228,7 @@ export default function SettingOption() {
             <Text style={styles.listItemSubtitle}>
               <Switch 
                 value={data.waterState || false} 
-                onValueChange={() => handleInputChange ("waterState", value)} />
+                onValueChange={value => handleInputChange ("waterState", value)} />
             </Text>
           </View>
         </ListItem.Content>
@@ -240,7 +244,7 @@ export default function SettingOption() {
             <Text style={styles.listItemSubtitle}>
               <Switch 
                 value={data.fanState || false} 
-                onValueChange={() => handleInputChange ("fanState", value)} />
+                onValueChange={value => handleInputChange ("fanState", value)} />
             </Text>
           </View>
         </ListItem.Content>
