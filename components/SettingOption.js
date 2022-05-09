@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { View, Text, ScrollView, TouchableOpacity, Modal, StyleSheet } from 'react-native'
 import {db} from '../firebase-config/firebase'
-import {Icon, ListItem, Slider} from 'react-native-elements';
+import {Icon, ListItem, Slider, Switch } from 'react-native-elements';
 
 export default function SettingOption() {
     const [modalVisible, setModalVisible] = useState(false);
@@ -127,7 +127,7 @@ export default function SettingOption() {
       <ListItem onPress={() => handleSettingChange("maxHumidity", !modalVisible)} bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
-            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+            <Icon name="cloud-rain" color="red" type="font-awesome-5" size={24}/>
             <Text style={styles.listItemText}>Maximum Humidity</Text>     
           </View>
           <View>
@@ -142,7 +142,7 @@ export default function SettingOption() {
       <ListItem onPress={() => handleSettingChange("minHumidity", !modalVisible)} bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
-            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+            <Icon name="cloud-rain" color="blue" type="font-awesome-5" size={24}/>
             <Text style={styles.listItemText}>Minimum Humidity</Text>     
           </View>
           <View>
@@ -157,7 +157,7 @@ export default function SettingOption() {
       <ListItem onPress={() => handleSettingChange("maxMoisture", !modalVisible)} bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
-            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+            <Icon name="water-percent" color="red" type="material-community" size={24}/>
             <Text style={styles.listItemText}>Maximum Moisture</Text>     
           </View>
           <View>
@@ -172,7 +172,7 @@ export default function SettingOption() {
       <ListItem onPress={() => handleSettingChange("minMoisture", !modalVisible)} bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
-            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+          <Icon name="water-percent" color="blue" type="material-community" size={24}/>
             <Text style={styles.listItemText}>Minimum Moisture</Text>     
           </View>
           <View>
@@ -187,7 +187,7 @@ export default function SettingOption() {
       <ListItem onPress={() => handleSettingChange("minWaterLevel", !modalVisible)} bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
-            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+            <Icon name="water" color="blue" type="material-community" size={24}/>
             <Text style={styles.listItemText}>Minimum Water Level</Text>     
           </View>
           <View>
@@ -202,7 +202,7 @@ export default function SettingOption() {
       <ListItem onPress={() => handleSettingChange("waterInternal", !modalVisible)} bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
-            <Icon name="" color="red" type="font-awesome-5" size={24}/>
+            <Icon name="water" color="black" type="font-awesome-5" size={24}/>
             <Text style={styles.listItemText}>Daily Watering Interval</Text>     
           </View>
           <View>
@@ -212,6 +212,38 @@ export default function SettingOption() {
           </View>
         </ListItem.Content>
         <ListItem.Chevron />
+      </ListItem>
+
+      <ListItem bottomDivider>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="water" color="black" type="material-community" size={24}/>
+            <Text style={styles.listItemText}>Water Current State</Text>     
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              <Switch 
+                value={data.waterState || false} 
+                onValueChange={() => handleInputChange ("waterState", value)} />
+            </Text>
+          </View>
+        </ListItem.Content>
+      </ListItem>
+
+      <ListItem bottomDivider>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="fan" color="black" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>Fan Current State</Text>     
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              <Switch 
+                value={data.fanState || false} 
+                onValueChange={() => handleInputChange ("fanState", value)} />
+            </Text>
+          </View>
+        </ListItem.Content>
       </ListItem>
       
     </ScrollView>
