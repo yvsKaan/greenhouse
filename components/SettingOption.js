@@ -5,18 +5,23 @@ import {Icon, ListItem, Slider, Switch } from 'react-native-elements';
 
 export default function SettingOption() {
     const [modalVisible, setModalVisible] = useState(false);
+    
     const [currentSetting, setCurrentSetting] = useState(0);
     const [modalSetting, setModalSetting] = useState("");
+    
     const [maxSliderValue, setMaxSliderValue] = useState(500);
     const [minSliderValue, setMinSliderValue] = useState(0);
+    
     const [data, setData] = useState([]);
+    const [dataRefresh, setDataRefresh] = useState();
   
     useEffect(() => {
         db.ref("/Ayarlar").once('value', snapshot => {
         const veri = snapshot.val();
         setData(veri);
-        })
-    }, [currentSetting]);
+        setDataRefresh(false);
+      })
+    }, [dataRefresh]);
 
     const handleSettingChange = (modalSettingName, modalVisibleSetting) => {
         setModalVisible(modalVisibleSetting);
@@ -52,12 +57,12 @@ export default function SettingOption() {
 
     const handleInputChange = (inputName, value) => {
         db.ref('/Ayarlar/' + inputName).set(value);
-        if(typeof value === "boolean" && currentSetting === value){
-          setCurrentSetting(!value);
-        }else{
-          setCurrentSetting(value);
+        if(typeof value !== "boolean"){
+          setModalVisible(!modalVisible);
         }
+        setDataRefresh(true);
     }
+    
   return (
     <ScrollView horizontal="true">
       <Modal
@@ -65,7 +70,6 @@ export default function SettingOption() {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
           setModalVisible(!modalVisible);
         }}
       >
@@ -83,14 +87,14 @@ export default function SettingOption() {
             </Text>
             <Slider
               value={data[modalSetting]}
-              onValueChange={value => handleInputChange(modalSetting, value)}
+              onValueChange={value => setCurrentSetting(value)}
               step={1}
               maximumValue={maxSliderValue}
               minimumValue={minSliderValue}
             />
               <TouchableOpacity
                 style={styles.buttonClose}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={() => handleInputChange(modalSetting, currentSetting)}
               >
                 <Text style={styles.textStyle}>Confirm</Text>
               </TouchableOpacity>
@@ -228,7 +232,7 @@ export default function SettingOption() {
             <Text style={styles.listItemSubtitle}>
               <Switch 
                 value={data.waterState || false} 
-                onValueChange={value => handleInputChange ("waterState", value)} />
+                onValueChange={value => handleInputChange("waterState", value)} />
             </Text>
           </View>
         </ListItem.Content>
@@ -244,7 +248,7 @@ export default function SettingOption() {
             <Text style={styles.listItemSubtitle}>
               <Switch 
                 value={data.fanState || false} 
-                onValueChange={value => handleInputChange ("fanState", value)} />
+                onValueChange={value => handleInputChange("fanState", value)} />
             </Text>
           </View>
         </ListItem.Content>
