@@ -1,15 +1,13 @@
 import React from 'react'
 
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 
-export default function DetailBox({icon, title, value}) {
+export default function DetailBox({title, value}) {
   return (
     <View style={styles.detailContainer}>
-      {/* Tempeture, humidity more detail and touchable */}
       <Text style={styles.title}>{title}</Text>
-      <Image source={icon} />
-      <Text>{typeof value === 'boolean' ? value ? "On" : "Off" : value}</Text>
+      <Text>{value}</Text>
     </View>
   )
 }
@@ -19,8 +17,8 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#eaeaea',
     marginTop: 10,
-    marginRight: '16%',
-    padding: 25,
+    marginRight: 10,
+    padding: 20,
     alignItems: 'center',
     borderRadius: 10,
     shadowColor: "#000",
@@ -35,5 +33,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: '700',
+    marginVertical: 5,
   }
 })

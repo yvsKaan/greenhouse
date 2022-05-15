@@ -1,18 +1,36 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import {db} from '../firebase-config/firebase'
 import { useNavigation } from '@react-navigation/native';
 
 import ListOption from './ListOption';
 
-export default function GreenhouseList(props) {
+export default function GreenhouseList() {
   const navigation = useNavigation();
+
+  const [data, setData] = useState([]);
+  const [fan, setFan] = useState(false);
+
+  useEffect(() => {
+    db.ref("/Sera").once('value').then(snapshot => {
+      const SeraData = snapshot.val();
+      const lastItem = Object.values(Object.values(SeraData)[Object.keys(SeraData).length - 1]);
+      setData(lastItem);
+    });
+    db.ref("/Ayarlar/fanState").once('value').then(snapshot => {
+      const fanState = snapshot.val();
+      setFan(fanState);
+    });
+  }, []);
+
   return (
-    <TouchableOpacity 
+    <TouchableOpacity style={styles.container}
     onPress={() => navigation.navigate('Detail', {
-      detail: props.Info,
-    })} style={styles.container} >
+      detail: data,
+      fanState: fan,
+    })}>
       <View style={styles.imageContainer}>
-        <Text style={styles.name}>{props.Info.name}</Text>
+        <Text style={styles.name}>Greenhouse</Text>
         <Image 
         style={styles.image}
         source={{
@@ -21,11 +39,11 @@ export default function GreenhouseList(props) {
       </View>
       
       <View style={styles.detail}>
-        <ListOption icon='temperature-high' icontype="font-awesome-5" value={props.Info.tempeture} />
-        <ListOption icon='water-percent' icontype="material-community" value={props.Info.humidity} />
-        <ListOption icon='water-outline' icontype="material-community" value={props.Info.water} />
-        <ListOption icon='lightbulb-outline' icontype="material" value={props.Info.light  ? "On" : "Off"} />
-        <ListOption icon='fan' icontype="font-awesome-5" value={props.Info.fan ? "On" : "Off"} />
+        <ListOption icon='temperature-high' icontype="font-awesome-5" value={data[1]} />
+        <ListOption icon='cloud-rain' icontype="font-awesome-5" value={data[0]} />
+        <ListOption icon='water-percent' icontype="material-community" value={data[2]} />
+        <ListOption icon='water' icontype="material-community" value={data[3]} />
+        <ListOption icon='fan' icontype="font-awesome-5" value={fan ? "On" : "Off"} />
       </View>
     </TouchableOpacity>
   )
