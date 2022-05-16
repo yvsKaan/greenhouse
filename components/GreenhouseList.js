@@ -25,10 +25,7 @@ export default function GreenhouseList() {
 
   return (
     <TouchableOpacity style={styles.container}
-    onPress={() => navigation.navigate('Detail', {
-      detail: data,
-      fanState: fan,
-    })}>
+    onPress={() => navigation.navigate('Detail')}>
       <View style={styles.imageContainer}>
         <Text style={styles.name}>Greenhouse</Text>
         <Image 

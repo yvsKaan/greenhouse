@@ -57,9 +57,6 @@ export default function SettingOption() {
 
     const handleInputChange = (inputName, value) => {
         db.ref('/Ayarlar/' + inputName).set(value);
-        if(typeof value !== "boolean"){
-          setModalVisible(!modalVisible);
-        }
         setDataRefresh(true);
     }
     
@@ -110,7 +107,7 @@ export default function SettingOption() {
           </View>
           <View>
             <Text style={styles.listItemSubtitle}>
-              {data.maxTempeture}
+              {data.maxTempeture || 0}
             </Text>
           </View>
         </ListItem.Content>
@@ -125,7 +122,7 @@ export default function SettingOption() {
           </View>
           <View>
             <Text style={styles.listItemSubtitle}>
-              {data.minTempeture}
+              {data.minTempeture || 0}
             </Text>
           </View>
         </ListItem.Content>
@@ -140,7 +137,7 @@ export default function SettingOption() {
           </View>
           <View>
             <Text style={styles.listItemSubtitle}>
-              {data.maxHumidity}
+              {data.maxHumidity || 0}
             </Text>
           </View>
         </ListItem.Content>
@@ -155,7 +152,7 @@ export default function SettingOption() {
           </View>
           <View>
             <Text style={styles.listItemSubtitle}>
-              {data.minHumidity}
+              {data.minHumidity || 0}
             </Text>
           </View>
         </ListItem.Content>
@@ -231,8 +228,8 @@ export default function SettingOption() {
           <View>
             <Text style={styles.listItemSubtitle}>
               <Switch 
-                value={data.waterState || false} 
-                onValueChange={value => handleInputChange("waterState", value)} />
+                value={data.waterState === "On" ? true : false} 
+                onValueChange={value => handleInputChange("waterState", value ? "On" : "Off")} />
             </Text>
           </View>
         </ListItem.Content>
@@ -247,8 +244,24 @@ export default function SettingOption() {
           <View>
             <Text style={styles.listItemSubtitle}>
               <Switch 
-                value={data.fanState || false} 
-                onValueChange={value => handleInputChange("fanState", value)} />
+                value={data.fanState  === "On" ? true : false} 
+                onValueChange={value => handleInputChange("fanState",  value ? "On" : "Off")} />
+            </Text>
+          </View>
+        </ListItem.Content>
+      </ListItem>
+
+      <ListItem bottomDivider>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="lightbulb" color="black" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>Light Current State</Text>     
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              <Switch 
+                value={data.lightState  === "On" ? true : false} 
+                onValueChange={value => handleInputChange("lightState",  value ? "On" : "Off")} />
             </Text>
           </View>
         </ListItem.Content>

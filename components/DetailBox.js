@@ -14,11 +14,11 @@ export default function DetailBox({title, value}) {
 
 const styles = StyleSheet.create({
   detailContainer: {
-    width: '100%',
+    width: '90%',
     backgroundColor: '#eaeaea',
     marginTop: 10,
-    marginRight: 10,
-    padding: 20,
+    marginHorizontal: '5%',
+    padding: 10,
     alignItems: 'center',
     borderRadius: 10,
     shadowColor: "#000",
