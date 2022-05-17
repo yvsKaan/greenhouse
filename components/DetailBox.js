@@ -3,22 +3,35 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 
-export default function DetailBox({title, value}) {
+export default function DetailBox({title, value, minValue, maxValue}) {
   return (
     <View style={styles.detailContainer}>
-      <Text style={styles.title}>{title}</Text>
-      <Text>{value}</Text>
+      <View style={styles.valueContainer}>
+        <Text>min</Text>
+        <Text>{minValue}</Text>
+      </View>
+      <View style={styles.valueContainer}>
+        <Text style={styles.title}>{title}</Text>
+        <Text>{value}</Text>
+      </View>
+      <View style={styles.valueContainer}>
+        <Text>max</Text>
+        <Text>{maxValue}</Text>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   detailContainer: {
+    flexDirection: 'row',
     width: '90%',
     backgroundColor: '#eaeaea',
     marginTop: 10,
     marginHorizontal: '5%',
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: 10,
     shadowColor: "#000",
@@ -29,6 +42,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowRadius: 6,
     elevation: 10,
+  },
+  valueContainer: {
+    alignItems: 'center'
   },
   title: {
     fontSize: 16,

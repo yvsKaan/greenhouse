@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { View, ScrollView, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import { View, ScrollView, Text, TouchableOpacity, Image, StyleSheet, Settings } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import {db} from '../firebase-config/firebase';
 import Header from '../components/Header';
@@ -10,29 +10,26 @@ export default function DetailScreen() {
   const navigation = useNavigation();
   
   const [data, setData] = useState([]);
+  const [setting, setSetting] = useState([]);
+  
   const [fan, setFan] = useState(false);
   const [light, setLight] = useState(false);
   const [water, setWater] = useState(false);
 
   useEffect(() => {
-    db.ref("/Sera").once('value').then(snapshot => {
-      const SeraData = snapshot.val();
-      const lastItem = Object.values(Object.values(SeraData)[Object.keys(SeraData).length - 1]);
-      setData(lastItem);
+    const unsubscribe = navigation.addListener('focus', () => {
+      db.ref("/Sera").once('value').then(snapshot => {
+        const SeraData = snapshot.val();
+        const lastItem = Object.values(Object.values(SeraData)[Object.keys(SeraData).length - 1]);
+        setData(lastItem);
+      });
+      db.ref("/Ayarlar").once('value').then(snapshot => {
+        const settingData = snapshot.val();
+        setSetting(settingData);
+      })
     });
-    db.ref("/Ayarlar/fanState").once('value').then(snapshot => {
-      const fanState = snapshot.val();
-      setFan(fanState);
-    });
-    db.ref("/Ayarlar/lightState").once('value').then(snapshot => {
-      const lightState = snapshot.val();
-      setLight(lightState);
-    });
-    db.ref("/Ayarlar/waterState").once('value').then(snapshot => {
-      const waterState = snapshot.val();
-      setWater(waterState);
-    });
-  }, []);
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View>
@@ -43,10 +40,27 @@ export default function DetailScreen() {
             uri: 'https://media.istockphoto.com/photos/symmetrical-overview-of-lots-of-small-chrysanthemum-cuttings-in-long-picture-id670157616?k=20&m=670157616&s=612x612&w=0&h=R-M03gUQcrqaJYgTlZlw9fzNxt0jCWBKpV59BCXpfw8=',
           }}/>
 
-      <DetailBox title="Tempeture" value={data[1]}/>
-      <DetailBox title="Humidity" value={data[0]}/>
-      <DetailBox title="Moisture" value={data[2]}/>
-      <MiniDetailBox waterLevel={data[3]} fanState={fan} lightState={light} waterState={water}/>
+      <DetailBox 
+        title="Tempeture" 
+        value={data[1]} 
+        minValue={setting.minTempeture} 
+        maxValue={setting.maxTempeture}/>
+      <DetailBox 
+        title="Humidity" 
+        value={data[0]} 
+        minValue={setting.minHumidity} 
+        maxValue={setting.maxHumidity}/>
+      <DetailBox 
+        title="Moisture" 
+        value={data[2]} 
+        minValue={setting.minMoisture} 
+        maxValue={setting.maxMoisture}/>
+      <MiniDetailBox 
+        waterLevel={setting.minWaterLevel} 
+        fanState={setting.fanState} 
+        lightState={setting.lightState} 
+        waterState={setting.waterState}
+      />
 
       <TouchableOpacity style={styles.settingBtn}
         onPress={() => navigation.navigate('Setting')}>

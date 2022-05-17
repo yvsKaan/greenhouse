@@ -9,19 +9,18 @@ export default function GreenhouseList() {
   const navigation = useNavigation();
 
   const [data, setData] = useState([]);
-  const [fan, setFan] = useState(false);
 
   useEffect(() => {
-    db.ref("/Sera").once('value').then(snapshot => {
-      const SeraData = snapshot.val();
-      const lastItem = Object.values(Object.values(SeraData)[Object.keys(SeraData).length - 1]);
-      setData(lastItem);
+    const unsubscribe = navigation.addListener('focus', () => {
+      db.ref("/Sera").once('value').then(snapshot => {
+        const SeraData = snapshot.val();
+        const lastItem = Object.values(Object.values(SeraData)[Object.keys(SeraData).length - 1]);
+        setData(lastItem);
+      });
     });
-    db.ref("/Ayarlar/fanState").once('value').then(snapshot => {
-      const fanState = snapshot.val();
-      setFan(fanState);
-    });
-  }, []);
+    return unsubscribe;
+    
+  }, [navigation]);
 
   return (
     <TouchableOpacity style={styles.container}
@@ -36,11 +35,10 @@ export default function GreenhouseList() {
       </View>
       
       <View style={styles.detail}>
-        <ListOption icon='temperature-high' icontype="font-awesome-5" value={data[1]} />
-        <ListOption icon='cloud-rain' icontype="font-awesome-5" value={data[0]} />
-        <ListOption icon='water-percent' icontype="material-community" value={data[2]} />
-        <ListOption icon='water' icontype="material-community" value={data[3]} />
-        <ListOption icon='fan' icontype="font-awesome-5" value={fan ? "On" : "Off"} />
+        <ListOption title="Tempeture" icon='temperature-high' icontype="font-awesome-5" value={data[1]} />
+        <ListOption title="Humidity" icon='cloud-rain' icontype="font-awesome-5" value={data[0]} />
+        <ListOption title="Moisture" icon='water-percent' icontype="material-community" value={data[2]} />
+        <ListOption title="Water Level" icon='water' icontype="material-community" value={data[3]} />
       </View>
     </TouchableOpacity>
   )
