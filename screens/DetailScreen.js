@@ -12,10 +12,6 @@ export default function DetailScreen() {
   const [data, setData] = useState([]);
   const [setting, setSetting] = useState([]);
   
-  const [fan, setFan] = useState(false);
-  const [light, setLight] = useState(false);
-  const [water, setWater] = useState(false);
-
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       db.ref("/Sera").once('value').then(snapshot => {
@@ -26,7 +22,7 @@ export default function DetailScreen() {
       db.ref("/Ayarlar").once('value').then(snapshot => {
         const settingData = snapshot.val();
         setSetting(settingData);
-      })
+      });
     });
     return unsubscribe;
   }, [navigation]);

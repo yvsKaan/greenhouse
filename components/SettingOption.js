@@ -58,9 +58,9 @@ export default function SettingOption() {
     const handleInputChange = (inputName, value) => {
         db.ref('/Ayarlar/' + inputName).set(value);
         if(inputName === "userPermission" && value === "Off"){
-          db.ref('/Ayarlar/fanState').set(false);
-          db.ref('/Ayarlar/lightState').set(false);
-          db.ref('/Ayarlar/waterState').set(false);
+          db.ref('/Ayarlar/fanState').set("Off");
+          db.ref('/Ayarlar/lightState').set("Off");
+          db.ref('/Ayarlar/waterState').set("Off");
         }
         if (typeof value === "number"){
           setModalVisible(!modalVisible);
