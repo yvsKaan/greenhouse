@@ -7,7 +7,7 @@ export default function DetailBox({title, value, minValue, maxValue}) {
   return (
     <View style={styles.detailContainer}>
       <View style={styles.valueContainer}>
-        <Text>min</Text>
+        <Text>min</Text> 
         <Text>{minValue}</Text>
       </View>
       <View style={styles.valueContainer}>

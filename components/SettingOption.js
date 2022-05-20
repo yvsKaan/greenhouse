@@ -57,11 +57,19 @@ export default function SettingOption() {
 
     const handleInputChange = (inputName, value) => {
         db.ref('/Ayarlar/' + inputName).set(value);
+        if(inputName === "userPermission" && value === "Off"){
+          db.ref('/Ayarlar/fanState').set(false);
+          db.ref('/Ayarlar/lightState').set(false);
+          db.ref('/Ayarlar/waterState').set(false);
+        }
+        if (typeof value === "number"){
+          setModalVisible(!modalVisible);
+        }
         setDataRefresh(true);
     }
     
   return (
-    <ScrollView horizontal="true">
+    <ScrollView contentContainerStyle={{flexGrow: 1, height: '110%'}}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -98,8 +106,11 @@ export default function SettingOption() {
           </View>
         </View>
       </Modal>
-      
-      <ListItem onPress={() => handleSettingChange("maxTempeture", !modalVisible)} bottomDivider>
+
+      <ListItem onPress={() => { data.userPermission === "Off" ? 
+        handleSettingChange("maxTempeture", !modalVisible) : 
+        alert("Automation isn't active.")}
+      } bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
             <Icon name="temperature-high" color="red" type="font-awesome-5" size={24}/>
@@ -114,7 +125,10 @@ export default function SettingOption() {
         <ListItem.Chevron />
       </ListItem>
 
-      <ListItem onPress={() => handleSettingChange("minTempeture", !modalVisible)} bottomDivider>
+      <ListItem onPress={() => { data.userPermission === "Off" ? 
+        handleSettingChange("minTempeture", !modalVisible) : 
+        alert("Automation isn't active.")}
+      } bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
             <Icon name="temperature-low" color="blue" type="font-awesome-5" size={24}/>
@@ -129,7 +143,10 @@ export default function SettingOption() {
         <ListItem.Chevron />
       </ListItem>
 
-      <ListItem onPress={() => handleSettingChange("maxHumidity", !modalVisible)} bottomDivider>
+      <ListItem onPress={() => { data.userPermission === "Off" ? 
+        handleSettingChange("maxHumidity", !modalVisible) : 
+        alert("Automation isn't active.")}
+      } bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
             <Icon name="cloud-rain" color="red" type="font-awesome-5" size={24}/>
@@ -144,7 +161,10 @@ export default function SettingOption() {
         <ListItem.Chevron />
       </ListItem>
 
-      <ListItem onPress={() => handleSettingChange("minHumidity", !modalVisible)} bottomDivider>
+      <ListItem onPress={() => { data.userPermission === "Off" ? 
+        handleSettingChange("minHumidity", !modalVisible) : 
+        alert("Automation isn't active.")}
+      } bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
             <Icon name="cloud-rain" color="blue" type="font-awesome-5" size={24}/>
@@ -159,7 +179,10 @@ export default function SettingOption() {
         <ListItem.Chevron />
       </ListItem>
 
-      <ListItem onPress={() => handleSettingChange("maxMoisture", !modalVisible)} bottomDivider>
+      <ListItem onPress={() => { data.userPermission === "Off" ? 
+        handleSettingChange("maxMoisture", !modalVisible) : 
+        alert("Automation isn't active.")}
+      } bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
             <Icon name="water-percent" color="red" type="material-community" size={24}/>
@@ -174,7 +197,10 @@ export default function SettingOption() {
         <ListItem.Chevron />
       </ListItem>
 
-      <ListItem onPress={() => handleSettingChange("minMoisture", !modalVisible)} bottomDivider>
+      <ListItem onPress={() => { data.userPermission === "Off" ? 
+        handleSettingChange("minMoisture", !modalVisible) : 
+        alert("Automation isn't active.")}
+      } bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
           <Icon name="water-percent" color="blue" type="material-community" size={24}/>
@@ -189,7 +215,11 @@ export default function SettingOption() {
         <ListItem.Chevron />
       </ListItem>
 
-      <ListItem onPress={() => handleSettingChange("minWaterLevel", !modalVisible)} bottomDivider>
+      <ListItem onPress={() => {
+        data.userPermission === "Off" ? 
+        handleSettingChange("minWaterLevel", !modalVisible) : 
+        alert("Automation isn't active.")
+        }} bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
             <Icon name="water" color="blue" type="material-community" size={24}/>
@@ -204,7 +234,10 @@ export default function SettingOption() {
         <ListItem.Chevron />
       </ListItem>
 
-      <ListItem onPress={() => handleSettingChange("waterInternal", !modalVisible)} bottomDivider>
+      <ListItem onPress={() => { data.userPermission === "Off" ? 
+        handleSettingChange("waterInternal", !modalVisible) :
+        alert("Automation isn't active.")
+      }} bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
             <Icon name="water" color="black" type="font-awesome-5" size={24}/>
@@ -229,7 +262,10 @@ export default function SettingOption() {
             <Text style={styles.listItemSubtitle}>
               <Switch 
                 value={data.waterState === "On" ? true : false} 
-                onValueChange={value => handleInputChange("waterState", value ? "On" : "Off")} />
+                onValueChange={value => {
+                  data.userPermission === "On" ? handleInputChange("waterState",  value ? "On" : "Off") : 
+                  alert("Manual use not active.")}
+                } />
             </Text>
           </View>
         </ListItem.Content>
@@ -245,7 +281,10 @@ export default function SettingOption() {
             <Text style={styles.listItemSubtitle}>
               <Switch 
                 value={data.fanState  === "On" ? true : false} 
-                onValueChange={value => handleInputChange("fanState",  value ? "On" : "Off")} />
+                onValueChange={value => {
+                  data.userPermission === "On" ? handleInputChange("fanState",  value ? "On" : "Off") : 
+                  alert("Manual use not active.")}
+                } />
             </Text>
           </View>
         </ListItem.Content>
@@ -259,9 +298,28 @@ export default function SettingOption() {
           </View>
           <View>
             <Text style={styles.listItemSubtitle}>
-              <Switch 
+              <Switch
                 value={data.lightState  === "On" ? true : false} 
-                onValueChange={value => handleInputChange("lightState",  value ? "On" : "Off")} />
+                onValueChange={value => {
+                  data.userPermission === "On" ? handleInputChange("lightState",  value ? "On" : "Off") : 
+                  alert("Manual use not active.")}
+                } />
+            </Text>
+          </View>
+        </ListItem.Content>
+      </ListItem>
+
+      <ListItem bottomDivider>
+        <ListItem.Content style={styles.listItemContent}>
+          <View style={styles.listItem}>
+            <Icon name="user-plus" color="black" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>User Manual Control</Text>     
+          </View>
+          <View>
+            <Text style={styles.listItemSubtitle}>
+              <Switch 
+                value={data.userPermission  === "On" ? true : false} 
+                onValueChange={value => handleInputChange("userPermission",  value ? "On" : "Off")} />
             </Text>
           </View>
         </ListItem.Content>
