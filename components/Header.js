@@ -1,9 +1,9 @@
 import React from 'react'
-
 import { View, Text, Image, TouchableWithoutFeedback, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import {Icon, Avatar} from 'react-native-elements';
-import {auth} from '../firebase-config/firebase'
+import {auth} from '../firebase-config/firebase';
+import logo from '../assets/header_logo.png';
 
 export default function Header({isHome, title}) {
   const navigation = useNavigation();
@@ -18,18 +18,15 @@ export default function Header({isHome, title}) {
   }
   return (
     <View style={styles.header}>
-      {isHome ? <Text></Text> : <TouchableWithoutFeedback onPress={()=> navigation.goBack()}>
-        <Icon containerStyle={styles.goBack} name='arrow-back' type='ionicon' size={42} color='#fff'
-        />
+      <TouchableWithoutFeedback onPress={()=> isHome ? navigation.navigate("Notification") : navigation.goBack()}>
+        {
+          isHome ?  <Icon name='notifications-outline' type='ionicon' size={32} color='#fff' /> : 
+          <Icon name='arrow-back-outline' type='ionicon' size={32} color='#fff'/>
+        }
       </TouchableWithoutFeedback>
-      }
-      <Text style={styles.title}>{title}</Text>
-      <Avatar 
-      icon={{name: 'user', type: 'font-awesome'}}
-      size="medium" 
-      rounded 
-      activeOpacity={0.5} 
-      onPress={handleSingOut} />
+      
+      <Image source={logo} style={styles.logo}/>
+      <Icon name='log-out-outline' type='ionicon' size={32} color='#fff' onPress={handleSingOut} />
     </View>
   )
 }
@@ -37,17 +34,18 @@ export default function Header({isHome, title}) {
 const styles = StyleSheet.create({
     header: {
       flexDirection: 'row',
-      paddingTop: 25,
-      paddingHorizontal: 10,
-      marginBottom: '5%',
+      paddingHorizontal: 20,
+      paddingBottom: 15,
+      marginBottom: 20,
       height: 100,
       width: '100%',
       backgroundColor: '#25C050',
       borderBottomLeftRadius: 30,
       borderBottomRightRadius: 30,
-      alignItems: 'center',
+      alignItems: 'flex-end',
       justifyContent: 'space-between',
     },
+    logo: {height: 70, width: 300},
     title: {
       color: "white",
       fontSize: 24,
