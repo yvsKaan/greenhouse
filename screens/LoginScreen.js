@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react'
-
+import { auth } from '../firebase-config/firebase';
 import { KeyboardAvoidingView, View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native'
 
 export default function LoginScreen() {

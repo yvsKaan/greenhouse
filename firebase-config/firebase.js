@@ -30,4 +30,4 @@ else {
 const db = app.database();
 const auth = firebase.auth();
 
-export { db };
+export { db, auth};
