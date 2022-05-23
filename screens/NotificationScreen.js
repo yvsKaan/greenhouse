@@ -6,13 +6,19 @@ import NotificationOption from '../components/NotificationOption';
 
 export default function NotificationScreen() {
   const [notifications, setNotifications] = useState([]);
+  const [dataRefresh, setDataRefresh] = useState(false);
 
+  const handleRefresh = (dataRefreshState) => {
+    setDataRefresh(dataRefreshState);
+  };
+  
   useEffect(() => {
     db.ref("/Warning").once('value', snapshot => {
       const veri = snapshot.val();
       setNotifications(veri);
+      setDataRefresh(false);
     })
-  }, []);
+  }, [dataRefresh]);
   
   return (
     <SafeAreaView>
@@ -21,7 +27,7 @@ export default function NotificationScreen() {
         <Text style={styles.title}>Notifications: </Text>
         {
           Object.entries(notifications).reverse().map(([key,v])=>{
-              return <NotificationOption key={key} info={v} infoKey={key} />
+              return <NotificationOption key={key} info={v} infoKey={key} refresh={handleRefresh}/>
         })}
       </View>
       

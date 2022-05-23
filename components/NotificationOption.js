@@ -2,14 +2,15 @@ import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native'
 import React, {useState} from 'react'
 import {db} from '../firebase-config/firebase'
 
-export default function NotificationOption({info, infoKey}) {
+export default function NotificationOption({info, infoKey, refresh}) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleModal = () => {
     db.ref('/Warning/'+ infoKey + '/isRead').set('On')
     setModalVisible(false);
+    refresh(true);
   };
-  
+
   return (
     <TouchableOpacity style={styles.container} onPress={() => setModalVisible(true)}>
       <Modal
