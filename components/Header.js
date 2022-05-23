@@ -5,7 +5,7 @@ import {Icon, Avatar} from 'react-native-elements';
 import {auth} from '../firebase-config/firebase';
 import logo from '../assets/header_logo.png';
 
-export default function Header({isHome, title}) {
+export default function Header({isHome, notificationNumber}) {
   const navigation = useNavigation();
 
   const handleSingOut = () => {
@@ -20,7 +20,11 @@ export default function Header({isHome, title}) {
     <View style={styles.header}>
       <TouchableWithoutFeedback onPress={()=> isHome ? navigation.navigate("Notification") : navigation.goBack()}>
         {
-          isHome ?  <Icon name='notifications-outline' type='ionicon' size={32} color='#fff' /> : 
+          isHome ?  
+          <View style={styles.notification}>
+            <Icon name='notifications-outline' type='ionicon' size={32} color='#fff' /> 
+            <Text style={{position: 'absolute', right: -3, top: -10, color: '#fff', fontWeight: '700'}}>{notificationNumber}</Text>
+          </View>: 
           <Icon name='arrow-back-outline' type='ionicon' size={32} color='#fff'/>
         }
       </TouchableWithoutFeedback>

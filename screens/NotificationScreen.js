@@ -1,4 +1,4 @@
-import {SafeAreaView, View, Text, StyleSheet} from 'react-native'
+import {SafeAreaView, View, ScrollView, StyleSheet} from 'react-native'
 import React, { useState, useEffect} from 'react'
 import Header from '../components/Header'
 import {db} from '../firebase-config/firebase'
@@ -21,17 +21,15 @@ export default function NotificationScreen() {
   }, [dataRefresh]);
   
   return (
-    <SafeAreaView>
+    <ScrollView>
       <Header isHome= {false} />
       <View style={styles.notificationContainer}>
-        <Text style={styles.title}>Notifications: </Text>
         {
           Object.entries(notifications).reverse().map(([key,v])=>{
               return <NotificationOption key={key} info={v} infoKey={key} refresh={handleRefresh}/>
         })}
       </View>
-      
-    </SafeAreaView>
+    </ScrollView>
   )
 }
 
@@ -39,6 +37,5 @@ const styles = StyleSheet.create({
   notificationContainer: {
     width: '100%',
     paddingHorizontal: 10,
-
-  }
+  },
 });
