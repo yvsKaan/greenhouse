@@ -45,15 +45,6 @@ const styles = StyleSheet.create({
       alignItems: 'flex-end',
       justifyContent: 'space-between',
     },
-    logo: {height: 70, width: 300},
-    title: {
-      color: "white",
-      fontSize: 24,
-      textTransform: "uppercase",
-      textAlign: 'center',
-    },
-    goBack: {
-      marginLeft: 20
-    },
+    logo: {width: 300, resizeMode: 'contain'},
 });
   

@@ -12,7 +12,7 @@ export default function GreenhouseList() {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      db.ref("/Sera").once('value').then(snapshot => {
+      db.ref("/Greenhouse").once('value').then(snapshot => {
         const SeraData = snapshot.val();
         const lastItem = Object.values(Object.values(SeraData)[Object.keys(SeraData).length - 1]);
         setData(lastItem);
@@ -35,9 +35,9 @@ export default function GreenhouseList() {
       </View>
       
       <View style={styles.detail}>
-        <ListOption title="Tempeture" icon='temperature-high' icontype="font-awesome-5" value={data[1]} />
+        <ListOption title="Tempeture" icon='temperature-high' icontype="font-awesome-5" value={data[2]} />
         <ListOption title="Humidity" icon='cloud-rain' icontype="font-awesome-5" value={data[0]} />
-        <ListOption title="Moisture" icon='water-percent' icontype="material-community" value={data[2]} />
+        <ListOption title="Moisture" icon='water-percent' icontype="material-community" value={data[1]} />
         <ListOption title="Water Level" icon='water' icontype="material-community" value={data[3]} />
       </View>
     </TouchableOpacity>

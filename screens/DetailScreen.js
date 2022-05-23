@@ -14,12 +14,12 @@ export default function DetailScreen() {
   
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      db.ref("/Sera").once('value').then(snapshot => {
+      db.ref("/Greenhouse").once('value').then(snapshot => {
         const SeraData = snapshot.val();
         const lastItem = Object.values(Object.values(SeraData)[Object.keys(SeraData).length - 1]);
         setData(lastItem);
       });
-      db.ref("/Ayarlar").once('value').then(snapshot => {
+      db.ref("/Settings").once('value').then(snapshot => {
         const settingData = snapshot.val();
         setSetting(settingData);
       });
@@ -38,7 +38,7 @@ export default function DetailScreen() {
 
       <DetailBox 
         title="Tempeture" 
-        value={data[1]} 
+        value={data[2]} 
         minValue={setting.minTempeture} 
         maxValue={setting.maxTempeture}/>
       <DetailBox 
@@ -48,11 +48,11 @@ export default function DetailScreen() {
         maxValue={setting.maxHumidity}/>
       <DetailBox 
         title="Moisture" 
-        value={data[2]} 
+        value={data[1]} 
         minValue={setting.minMoisture} 
         maxValue={setting.maxMoisture}/>
       <MiniDetailBox 
-        waterLevel={setting.minWaterLevel} 
+        waterLevel={data[3]} 
         fanState={setting.fanState} 
         lightState={setting.lightState} 
         waterState={setting.waterState}

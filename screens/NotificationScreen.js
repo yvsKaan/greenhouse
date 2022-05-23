@@ -1,10 +1,38 @@
-import { View, Text, SafeAreaView } from 'react-native'
-import React from 'react'
+import {SafeAreaView, View, Text, StyleSheet} from 'react-native'
+import React, { useState, useEffect} from 'react'
+import Header from '../components/Header'
+import {db} from '../firebase-config/firebase'
+import NotificationOption from '../components/NotificationOption';
 
 export default function NotificationScreen() {
+  const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    db.ref("/Warning").once('value', snapshot => {
+      const veri = snapshot.val();
+      setNotifications(veri);
+    })
+  }, []);
+  
   return (
-    <SafeAreaView style={{paddingVertical: 50}}>
-      <Text>NotificationScreen</Text>
+    <SafeAreaView>
+      <Header isHome= {false} />
+      <View style={styles.notificationContainer}>
+        <Text style={styles.title}>Notifications: </Text>
+        {
+          Object.entries(notifications).reverse().map(([key,v])=>{
+              return <NotificationOption key={key} info={v} infoKey={key} />
+        })}
+      </View>
+      
     </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  notificationContainer: {
+    width: '100%',
+    paddingHorizontal: 10,
+
+  }
+});

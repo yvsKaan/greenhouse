@@ -16,7 +16,7 @@ export default function SettingOption() {
     const [dataRefresh, setDataRefresh] = useState();
   
     useEffect(() => {
-        db.ref("/Ayarlar").once('value', snapshot => {
+        db.ref("/Settings").once('value', snapshot => {
         const veri = snapshot.val();
         setData(veri);
         setDataRefresh(false);
@@ -56,11 +56,11 @@ export default function SettingOption() {
     }
 
     const handleInputChange = (inputName, value) => {
-        db.ref('/Ayarlar/' + inputName).set(value);
+        db.ref('/Settings/' + inputName).set(value);
         if(inputName === "userPermission" && value === "Off"){
-          db.ref('/Ayarlar/fanState').set("Off");
-          db.ref('/Ayarlar/lightState').set("Off");
-          db.ref('/Ayarlar/waterState').set("Off");
+          db.ref('/Settings/fanState').set("Off");
+          db.ref('/Settings/lightState').set("Off");
+          db.ref('/Settings/waterState').set("Off");
         }
         if (typeof value === "number"){
           setModalVisible(!modalVisible);
@@ -91,7 +91,7 @@ export default function SettingOption() {
             </Text>
             </Text>
             <Slider
-              value={data[modalSetting]}
+              value={data[modalSetting] || 0}
               onValueChange={value => setCurrentSetting(value)}
               step={1}
               maximumValue={maxSliderValue}
