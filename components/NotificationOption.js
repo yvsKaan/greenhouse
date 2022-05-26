@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native'
 import React, {useState} from 'react'
 import {db} from '../firebase-config/firebase'
+import { Icon } from 'react-native-elements';
 
 export default function NotificationOption({info, infoKey, refresh}) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -19,8 +20,7 @@ export default function NotificationOption({info, infoKey, refresh}) {
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
-        }}
-      >
+        }} >
         <View style={styles.modalView}>
           <View style={styles.modalContainer}>
             <View style={styles.warningContainer}>
@@ -35,8 +35,10 @@ export default function NotificationOption({info, infoKey, refresh}) {
           </View>
         </View>
       </Modal>
-      <Text style={[styles.title, info.isRead === "On" ? styles.active : styles.Textcolor]}>{info.title}</Text>
-      
+      <Text style={[styles.title, info.isRead === "On" ? styles.active : styles.Textcolor]}>
+        {info.title}
+      </Text>
+
     </TouchableOpacity>
   )
 }
@@ -66,21 +68,17 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     warningContainer: {
-      alignItems: 'center',
+      alignItems: 'center', paddingHorizontal: 35
     },
     title: {
         fontSize: 16,
-        fontWeight: '700'
+        fontWeight: '700',
     },
-    warningTitle: {fontSize: 22, marginVertical: 20}, 
-    notification: { fontSize: 14 },
+    warningTitle: {fontSize: 22}, 
+    notification: { fontSize: 14, marginVertical: 25 },
     active: { color: '#a2a2a2'},
     Textcolor: {color: 'black'},
-    buttonClose: {
-      marginTop: 20,
-      flexDirection: 'row',
-      justifyContent: 'center',
-    },
+    buttonClose: { flexDirection: 'row', justifyContent: 'center'},
     textStyle: {
       paddingHorizontal: 50,
       paddingVertical: 10,
