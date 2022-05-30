@@ -48,7 +48,7 @@ export default function DetailScreen() {
         maxValue={setting.maxHumidity}/>
       <DetailBox 
         title="Moisture" 
-        value={data[1]} 
+        value={100 - data[1]} 
         minValue={setting.minMoisture} 
         maxValue={setting.maxMoisture}/>
       <MiniDetailBox 

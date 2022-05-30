@@ -37,7 +37,7 @@ export default function GreenhouseList() {
       <View style={styles.detail}>
         <ListOption title="Tempeture" icon='temperature-high' icontype="font-awesome-5" value={data[2]} />
         <ListOption title="Humidity" icon='cloud-rain' icontype="font-awesome-5" value={data[0]} />
-        <ListOption title="Moisture" icon='water-percent' icontype="material-community" value={data[1]} />
+        <ListOption title="Moisture" icon='water-percent' icontype="material-community" value={100 - data[1]} />
         <ListOption title="Water Level" icon='water' icontype="material-community" value={data[3]} />
       </View>
     </TouchableOpacity>

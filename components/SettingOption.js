@@ -49,7 +49,7 @@ export default function SettingOption() {
         }else if(modalSettingName === "minWaterLevel"){
           setMaxSliderValue(100);
           setMinSliderValue(0);
-        }else if(modalSettingName === "waterInternal"){
+        }else if(modalSettingName === "dailyRecord"){
           setMaxSliderValue(24);
           setMinSliderValue(0);
         }
@@ -86,7 +86,7 @@ export default function SettingOption() {
               {
                 modalSetting === "maxTempeture" ? "C" :
                 modalSetting === "minTempeture" ? "C" :  
-                modalSetting === "waterInternal" ? " Clock" : "%"
+                modalSetting === "dailyRecord" ? " Times" : "%"
               }
             </Text>
             </Text>
@@ -215,8 +215,7 @@ export default function SettingOption() {
         <ListItem.Chevron />
       </ListItem>
 
-      <ListItem onPress={() => {
-        data.userPermission === "Off" ? 
+      <ListItem onPress={() => { data.userPermission === "Off" ? 
         handleSettingChange("minWaterLevel", !modalVisible) : 
         alert("Automation isn't active.")
         }} bottomDivider>
@@ -235,17 +234,17 @@ export default function SettingOption() {
       </ListItem>
 
       <ListItem onPress={() => { data.userPermission === "Off" ? 
-        handleSettingChange("waterInternal", !modalVisible) :
+        handleSettingChange("dailyRecord", !modalVisible) :
         alert("Automation isn't active.")
       }} bottomDivider>
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
-            <Icon name="water" color="black" type="font-awesome-5" size={24}/>
-            <Text style={styles.listItemText}>Daily Watering Interval</Text>     
+            <Icon name="database" color="black" type="font-awesome-5" size={24}/>
+            <Text style={styles.listItemText}>Daily Data Record</Text>     
           </View>
           <View>
             <Text style={styles.listItemSubtitle}>
-              {data.waterInternal || 0}
+              {data.dailyRecord || 0}
             </Text>
           </View>
         </ListItem.Content>
