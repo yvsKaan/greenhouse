@@ -114,7 +114,7 @@ export default function SettingOption() {
         <ListItem.Content style={styles.listItemContent}>
           <View style={styles.listItem}>
             <Icon name="temperature-high" color="red" type="font-awesome-5" size={24}/>
-            <Text style={styles.listItemText}>Minimum Tempeture</Text>     
+            <Text style={styles.listItemText}>Maximum Tempeture</Text>     
           </View>
           <View>
             <Text style={styles.listItemSubtitle}>
